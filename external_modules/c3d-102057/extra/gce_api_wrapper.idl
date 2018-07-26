@@ -1,0 +1,315 @@
+// enum's
+
+enum constraint_type
+{
+  "GCE_FIX_GEOM",
+  "GCE_HORIZONTAL",
+  "GCE_VERTICAL",
+  "GCE_LENGTH",
+  "GCE_COINCIDENT",
+  "GCE_EQUAL_LENGTH",
+  "GCE_EQUAL_RADIUS",
+  "GCE_PARALLEL",
+  "GCE_PERPENDICULAR",
+  "GCE_TANGENT",
+  "GCE_COLINEAR",
+  "GCE_ALIGN_2P",
+  "GCE_ANGLE_BISECTOR",
+  "GCE_MIDDLE_POINT",
+  "GCE_COLINEAR_3P",
+  "GCE_SYMMETRIC",
+  "GCE_DISTANCE",
+  "GCE_RADIUS_DIM",
+  "GCE_DIAMETER",
+  "GCE_ANGLE",
+  "GCE_ANGLE_OX",
+  "GCE_CONSTRAINTS_COUNT",
+  "GCE_UNKNOWN_CON"
+};
+
+enum GCE_bisec_variant
+{
+  "bv_None",
+  "bv_NormalSum",
+  "bv_NormalDiff"
+};
+
+enum coord_name
+{
+  "GCE_X",
+  "GCE_Y",
+  "GCE_ACRD",
+  "GCE_DCRD",
+  "GCE_RADIUS",
+  "GCE_MAJOR_RADIUS",
+  "GCE_MINOR_RADIUS",
+  "GCE_NULL_CRD"
+};
+
+enum query_geom_type
+{
+  "GCE_FIRST_PTYPE",
+  "GCE_IMPROPER_POINT",
+  "GCE_FIRST_END",
+  "GCE_SECOND_END",
+  "GCE_CENTRE",
+  "GCE_PROPER_POINT",
+  "GCE_Q1",
+  "GCE_Q2",
+  "GCE_Q3",
+  "GCE_Q4",
+  "GCE_LAST_PTYPE",
+  "GCE_DIRECTION",
+  "GCE_ORIENTATION"
+};
+
+enum geom_type
+{
+  "GCE_ANY_GEOM",
+  "GCE_POINT",
+  "GCE_LINE",
+  "GCE_CIRCLE",
+  "GCE_ELLIPSE",
+  "GCE_SPLINE",
+  "GCE_PARAMETRIC_CURVE",
+  "GCE_BOUNDED_CURVE",
+  "GCE_LINE_SEGMENT",
+  "GCE_ARC",
+  "GCE_ELLIPSE_ARC",
+  "GCE_SET"
+};
+
+enum GCE_result
+{
+  "GCE_RESULT_None",
+  "GCE_RESULT_Ok",
+  "GCE_RESULT_Satisfied",
+  "GCE_RESULT_Not_Satisfied",
+  "GCE_RESULT_Overconstrained",
+  "GCE_RESULT_InvalidGeometry",
+  "GCE_RESULT_MovingOfFixedGeom",
+  "GCE_RESULT_Unregistered",
+  "GCE_RESULT_SystemError",
+  "GCE_RESULT_NullSystem",
+  "GCE_RESULT_CircleCantStretched",
+  "GCE_RESULT_SingularMatrix",
+  "GCE_RESULT_DegenerateScalingFactor",
+  "GCE_RESULT_InvalidDimensionTransform"
+};
+
+
+// typedef's
+
+typedef coord_name coord_type;
+typedef query_geom_type point_type;
+typedef unsigned long geom_item;
+typedef unsigned long constraint_item;
+typedef unsigned long var_item;
+typedef VoidPtr GCE_system;
+
+// STL
+interface std_vector_geom_item
+{
+  std_vector_geom_item std_vector_geom_item(geom_item [] vec, unsigned long size);
+};
+
+// struct's
+
+interface GCE_dragging_point
+{
+  GCE_dragging_point GCE_dragging_point();
+  attribute geom_item geom;
+  attribute geom_item point;
+};
+
+interface GCE_diagnostic_pars
+{
+  GCE_diagnostic_pars GCE_diagnostic_pars();
+  attribute unsigned long consCount;
+  attribute double reductCoef;
+};
+
+interface GCE_vecNd
+{
+  GCE_vecNd GCE_vecNd();
+  attribute unsigned long size;
+  void set_arg(double [] arg);
+  any get_arg();
+};
+
+interface GCE_adim_pars
+{
+  GCE_adim_pars GCE_adim_pars();
+  [Value] attribute GCE_dim_pars dPars;
+  attribute double factor;
+  attribute boolean adjacent;
+};
+
+interface GCE_ellipse
+{
+  GCE_ellipse GCE_ellipse();
+  [Value] attribute GCE_point centre;
+  [Value] attribute GCE_vec2d direct;
+  attribute double majorR;
+  attribute double minorR;
+};
+
+interface GCE_point
+{
+  GCE_point GCE_point();
+  attribute double x;
+  attribute double y;
+};
+
+interface GCE_dim_pars
+{
+  GCE_dim_pars GCE_dim_pars();
+  attribute boolean isDriving;
+  attribute boolean isInformation;
+  attribute var_item var;
+  attribute double dimValue;
+};
+
+interface GCE_circle
+{
+  GCE_circle GCE_circle();
+  [Value] attribute GCE_point centre;
+  attribute double radius;
+};
+
+interface GCE_point_dof
+{
+  GCE_point_dof GCE_point_dof();
+  attribute long dof;
+  [Value] attribute GCE_vec2d dir;
+};
+
+interface GCE_ldim_pars
+{
+  GCE_ldim_pars GCE_ldim_pars();
+  [Value] attribute GCE_dim_pars dPars;
+  attribute double dirAngle;
+  void set_hp(geom_item [] hp);
+  any get_hp();
+};
+
+interface geom_point
+{
+  geom_point geom_point();
+  attribute geom_item geom;
+  attribute point_type pntName;
+};
+
+interface GCE_line
+{
+  GCE_line GCE_line();
+  [Value] attribute GCE_point p;
+  [Value] attribute GCE_vec2d norm;
+};
+
+interface GCE_vec2d
+{
+  GCE_vec2d GCE_vec2d();
+  attribute double x;
+  attribute double y;
+};
+
+
+// Functions
+
+interface gce_api
+{
+  gce_api gce_api();
+  static constraint_item GCE_AddPointOnPercent(GCE_system gSys, geom_item curve, geom_item [] pnt, double k);
+  static geom_item GCE_AddCircle(GCE_system gSys, [Ref, Const] GCE_circle cVal);
+  static boolean GCE_RemoveConstraint(GCE_system gSys, constraint_item con);
+  static GCE_system GCE_CreateSystem();
+  static GCE_system GCE_CreateSystem(VoidPtr arg1);
+  static double GCE_DimensionParameter(GCE_system gSys, constraint_item dItem);
+  static double GCE_GetVarValue(GCE_system gSys, var_item var);
+  static void GCE_RemoveSystem(GCE_system gSys);
+  static constraint_item GCE_AddTangent(GCE_system gSys, geom_item [] g, var_item [] tPar);
+  static long GCE_GetPointDOF(GCE_system gSys, geom_item g, point_type cp, double dofDir);
+  static constraint_item GCE_AddEqualLength(GCE_system gSys, geom_item ls1, geom_item ls2);
+  static constraint_item GCE_AddAngleBisector(GCE_system gSys, geom_item l1, geom_item l2, geom_item bl, GCE_bisec_variant variant);
+  static var_item GCE_AddVariable(GCE_system gSys, double val);
+  static constraint_item GCE_AddDistancePLs(GCE_system gSys, geom_item [] p, [Ref, Const] GCE_dim_pars dPars);
+  static constraint_item GCE_AddMiddlePoint(GCE_system gcSys, geom_item [] pnt);
+  static geom_item GCE_PointOf(GCE_system gSys, geom_item g, point_type pnt);
+  static geom_item GCE_AddLineSeg(GCE_system gSys, geom_item [] p);
+  static boolean GCE_SetCoordValue(GCE_system gSys, geom_item g, coord_name cName, double crdVal);
+  static constraint_item GCE_FixLength(GCE_system gSys, geom_item ls);
+  static constraint_item GCE_AddIncidence(GCE_system arg1, geom_item arg2, geom_item arg3);
+  static GCE_result GCE_DeviateDimension(GCE_system gSys, constraint_item dItem, double delta);
+  [Value] static GCE_vec2d GCE_GetVectorValue(GCE_system gSys, geom_item g, query_geom_type vType);
+  static constraint_item GCE_AddEqualRadius(GCE_system gSys, geom_item c1, geom_item c2);
+  static constraint_item GCE_AddColinear3Points(GCE_system gcSys, geom_item [] pnt);
+  static double GCE_GetCoordValue(GCE_system gSys, geom_item g, coord_name cName);
+  static constraint_item GCE_AddSymmetry(GCE_system gSys, geom_item [] g, geom_item lObj);
+  static geom_item GCE_AddEllipse(GCE_system gSys, [Ref, Const] GCE_ellipse eVal);
+  static constraint_item GCE_FixVariable(GCE_system gSys, var_item var);
+  static constraint_item GCE_AddAngle(GCE_system gSys, geom_item l1, geom_item l2, [Ref, Const] GCE_adim_pars dPars);
+  static boolean OK(GCE_result resCode);
+  static constraint_item GCE_AddUnaryConstraint(GCE_system gSys, constraint_type cType, geom_item geom);
+  static constraint_item GCE_FixRadius(GCE_system gSys, geom_item circ, coord_name cName);
+  static geom_item GCE_AddLine(GCE_system gSys, [Ref, Const] GCE_line lVal);
+  static boolean GCE_SetPointXY(GCE_system gSys, geom_item g, point_type pName, [Ref, Const] GCE_point xyVal);
+  static constraint_item GCE_AddDirectedDistance2P(GCE_system gSys, geom_item [] p, [Ref, Const] GCE_ldim_pars dPars);
+  static constraint_item GCE_AddDiameter(GCE_system gSys, geom_item cir, [Ref, Const] GCE_dim_pars dPar);
+  static constraint_item GCE_AddDistance(GCE_system gSys, geom_item [] g, [Ref, Const] GCE_ldim_pars dPars);
+  static constraint_item GCE_AddAngle4P(GCE_system gSys, geom_item [] fPair, geom_item [] sPair, [Ref, Const] GCE_adim_pars dPars);
+  static boolean GCE_IsConstrainedGeom(GCE_system gSys, geom_item g);
+  static constraint_item GCE_AddPerpendicular(GCE_system gSys, geom_item [] g);
+  static constraint_item GCE_AddAlignPoints(GCE_system gSys, geom_item [] p, double ang);
+  static constraint_item GCE_FixGeom(GCE_system gSys, geom_item g);
+  static geom_item GCE_AddPoint(GCE_system gSys, [Ref, Const] GCE_point pVal);
+  static geom_item GCE_AddPoint(GCE_system gSys, [Ref, Const] GCE_point pVal, long arg3);
+  static constraint_item GCE_AddFixedLength(GCE_system arg1, geom_item arg2);
+  static GCE_result GCE_ChangeDrivingDimension(GCE_system gSys, constraint_item dItem, double dVal);
+  static boolean GCE_SetVarValue(GCE_system gSys, var_item var, double val);
+  static GCE_result GCE_DeviationTest(GCE_system gSys, constraint_item dItem, double delta);
+  static constraint_item GCE_AddFixVariable(GCE_system arg1, var_item arg2);
+  static constraint_item GCE_AddRadiusDimension(GCE_system gSys, geom_item cir, [Ref, Const] GCE_dim_pars dPar);
+  static void GCE_ClearSystem(GCE_system gSys);
+  static constraint_item GCE_AddLinearEquation(GCE_system gSys, double [] a, var_item [] v, unsigned long n, double c);
+  static constraint_item GCE_AddParallel(GCE_system gSys, geom_item [] g);
+  static constraint_item GCE_AddPointOnParEllipse(GCE_system gSys, geom_item pnt, geom_item ellipse, double t);
+  static geom_type GCE_GeomType(GCE_system gSys, geom_item g);
+  static constraint_item GCE_AddDirectedDistance(GCE_system gSys, geom_item [] p, [Ref, Const] GCE_ldim_pars dPars);
+  static constraint_item GCE_AddColinear(GCE_system gSys, geom_item [] g);
+  static constraint_item GCE_AddPointByMetricPercent(GCE_system gSys, geom_item curve, geom_item [] pnt, double k);
+  static geom_item GCE_AddBoundedCurve(GCE_system gSys, geom_item curve, geom_item [] p);
+  static GCE_result GCE_Evaluate(GCE_system gSys);
+  static geom_type GCE_BaseCurveType(GCE_system gSys, geom_item crv);
+  [Value] static GCE_point_dof GCE_PointDOF(GCE_system gSys, geom_item pnt);
+  static constraint_item GCE_AddCoincidence(GCE_system gSys, geom_item [] p);
+  static boolean GCE_RemoveVariable(GCE_system gSys, var_item var);
+  static boolean GCE_IsSatisfied(GCE_system gSys, constraint_item cItem);
+  static GCE_result GCE_PrepareDraggingPoint(GCE_system gSys, [Ref, Const] GCE_dragging_point drgPnt, [Ref, Const] GCE_point curXY);
+  [Value] static GCE_point GCE_GetPointXY(GCE_system gSys, geom_item g, point_type pName);
+  static GCE_result GCE_MovePoint(GCE_system gcSys, [Ref, Const] GCE_point curXY);
+  static boolean GCE_FreezeGeom(GCE_system gSys, geom_item g);
+  static constraint_item GCE_AddFixCurvePoint(GCE_system gSys, geom_item curve, geom_item pnt);
+  static GCE_result GCE_PrepareMovingOfPoint(GCE_system gSys, geom_item obj, point_type pntId, [Ref, Const] GCE_point curXY);
+  static boolean GCE_SetJournal(GCE_system gSys, DOMString fName);
+  static constraint_item GCE_AddDistance2P(GCE_system gSys, geom_item [] p, [Ref, Const] GCE_dim_pars dPars);
+  static boolean GCE_RemoveGeom(GCE_system gSys, geom_item g);
+
+  static GCE_result GCE_PrepareMovingGeoms(GCE_system gSys, [Ref] std_vector_geom_item geoms, [Ref, Const] GCE_point curXY );
+
+  // constants
+  [Value] static unsigned long GCE_NULL();
+  [Value] static geom_item GCE_NULL_G();
+  [Value] static var_item GCE_NULL_V();
+  [Value] static constraint_item GCE_NULL_C();
+  [Value] static double GCE_UNDEFINED_DBL();
+};
+
+
+// c3d protection
+interface c3d_solver_enabler
+{
+  static void GCE_EnableSolverModule(DOMString name, long nameLength, DOMString key, long keyLength);
+  static boolean GCE_IsMathSolverEnable();
+  static void GCE_FreeMathModulesChecker();
+};

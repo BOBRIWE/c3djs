@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <title>3d-js</title>
+        <!-- <script src="js/c3d-102057/c3d.js"></script> -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <style>
+            .menu {
+                position: absolute;
+                /* height: 500px; */
+                /* width: 50px; */
+                z-index: 100;
+                top: 50px;
+                left: 50px;
+                box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
+            }
+            .canv-wrap {
+                position: relative;
+            }
+        </style>
+    </head>
+    <body class="bg-dark h-100">
+        <div id="root" class="container-fluid bg-dark h-100 py-3">
+
+
+            <div class="row-fluid h-100 no-gutters canv-wrap">
+                <div id="canvas-menu" class="menu bg-light rounded">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="place-point-button" autocomplete="off">Add-Point
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-segment-button" autocomplete="off">Add-Seg
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-circle-button" autocomplete="off">Add-Circle
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="move-button" autocomplete="off">Move
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-vertical-button" autocomplete="off">Vertical
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-horizontal-button" autocomplete="off">Horizontal
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-parallel-button" autocomplete="off">Parallel
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-perpendicular-button" autocomplete="off">Perpendicular
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-middle-point-button" autocomplete="off">Middle-Point
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="add-tangent-button" autocomplete="off">Tangent
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="move-geoms-button" autocomplete="off">Move-Better
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="freeze-button" autocomplete="off">Freeze
+                        </label>
+                    </div>
+                </div>
+                <div id="canvas-keeper" class="col-12 h-100 mb-5">
+                    <canvas id="canvas" class="bg-secondary w-100 h-100 rounded"></canvas>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
